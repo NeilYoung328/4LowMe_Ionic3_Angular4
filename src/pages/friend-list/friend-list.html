@@ -1,0 +1,222 @@
+<!--
+  Generated template for the PropertyListPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>4LowMe</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="gotoContactPage()">
+                <ion-icon name="mail"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="gotoMapPage()">
+                <ion-icon name="locate"></ion-icon>
+            </button>
+        </ion-buttons>
+        <ion-buttons end>
+            <button ion-button (click)="gotoUserPage()">
+                <ion-icon name="contact"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="property-list">
+
+    <!-- FIRST TAB : Dashboard Segment -->
+    <div *ngIf="viewMode==='dashboard'" inset padding class="card-background-page">
+        <ion-card>
+            <div class="title_area" style = "background-color:#FF8A0D;"></div>
+            <div class="card-title">Top Friends</div>
+            <ion-list>
+                <ion-item *ngFor="let property of top3Friends"  (click)="openFriendInfo(property)">
+                    {{property.FirstName}} {{property.LastName}}
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <ion-card (click) = "gotoMapPage()">
+            <div class="title_area" style = "background-color:#A2C922;"></div>
+            <div class="card-title">4Low Sessions</div>
+                <ion-list>
+                    <ion-item *ngFor="let property of top34LowSessions">
+                        {{property.sessionName}}
+                    </ion-item>
+                </ion-list>
+        </ion-card>
+
+        <ion-card>
+            <div class="title_area" style = "background-color:#7266BA;"></div>
+            <div class="card-title">Closet Friends</div>
+            <ion-list>
+                <ion-item *ngFor="let property of closetFriends"  (click)="openFriendInfo(property)">
+                    {{property.FirstName}} {{property.LastName}}
+                </ion-item>
+            </ion-list>
+        </ion-card>
+
+        <ion-card (click) = "gotosession()">
+            <div class="title_area" style = "background-color:#F05050;"></div>
+            <div class="card-title" style="top:21%;">Number of Active Sessions</div>
+            <ion-list>
+                <ion-item>{{activeSessionCount}}</ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
+
+    <!-- SECOND TAB : Add Friend Segment -->
+    <div *ngIf="viewMode==='addfriend'" inset>
+        <ion-searchbar [(ngModel)]="searchKey" (ionInput)="onInput($event)" (ionCancel)="onCancel($event)">
+        </ion-searchbar>
+        <ion-toolbar no-border-top>
+
+            <ion-segment [(ngModel)]="sendrequest" color="danger">
+                <ion-segment-button value="send">
+                    Friend Request
+                </ion-segment-button>
+                <ion-segment-button *ngIf="showFbFriendSegment == true" value="accept" (click)="refresh()">
+                    FB_Friend
+                </ion-segment-button>
+            </ion-segment>
+        </ion-toolbar>
+        <div [ngSwitch]="sendrequest">
+
+            <!-- Send Friend Request section -->
+            <ion-list *ngSwitchCase="'send'" inset>
+                <ion-list-header>Send Friend Request</ion-list-header>
+                <ion-item *ngFor="let property of properties"  [ngClass]="(disappear == true)?'hide':'show'">
+                    <ion-avatar item-left>
+                        <img src="{{property.ProfilePicture}}"/>
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{property.FirstName}} {{property.LastName}}</h2>
+                    </ion-label>
+                    <button ion-button outline item-end color="danger" (click)="sendRequestToFriend(property.User_Ref)">Send Request</button>
+                </ion-item>
+            </ion-list>
+
+            <!-- Send Facebook Friend Request Section -->
+            <ion-list *ngSwitchCase="'accept'" inset>
+                <ion-list-header text-center>
+                    <ion-label>Send Friend Request To <br>Facebook friend</ion-label>
+                </ion-list-header>
+                <ion-item *ngFor="let property of fbFriendsData"  [ngClass]="(disappear == true)?'hide':'show'">
+                    <ion-avatar item-left>
+                        <img src="{{property.ProfilePicture}}"/>
+                    </ion-avatar>
+                    <ion-label>
+                        <h2>{{property.FirstName}} {{property.LastName}}</h2>
+                    </ion-label>
+                    <button ion-button outline item-end color="danger" (click)="sendRequestToFriend(property.User_Ref)">Send Request</button>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+
+
+
+    <!-- THIRD TAB : Follow Me Segment -->
+    <div *ngIf="viewMode==='follow'" inset>
+        <ion-toolbar no-border-top>
+            <ion-segment [(ngModel)]="followrequest" color="danger">
+                <ion-segment-button value="follow" (click) = "refresh()">
+                    Follow Request
+                </ion-segment-button>
+                <ion-segment-button value="accept" (click) = "refresh()">
+                    Accept
+                    <ion-badge danger item-right id="notifications-badge">{{friendCandidateList.length}}</ion-badge>
+                </ion-segment-button>
+
+            </ion-segment>
+        </ion-toolbar>
+        <div [ngSwitch]="followrequest">
+
+            <!-- Follow Me request section -->
+            <ion-list *ngSwitchCase="'follow'" inset>
+                <ion-list-header>Follow Request</ion-list-header>
+                <ion-item-sliding *ngFor="let property of friendList; let i = index;" [attr.data-index]="i"  [ngClass]="(deleteFriendRequest[i] == true)?'hide':'show'">
+                    <ion-item>
+                        <ion-avatar item-left>
+                            <img src="{{property.ProfilePicture}}"/>
+                        </ion-avatar>
+                        <ion-label  (click)="openPropertyDetail(property)">
+                            <h2>{{property.FirstName}} {{property.LastName}}</h2>
+                        </ion-label>
+                        <ion-toggle color="danger" [(ngModel)]="friendSelect[i]" (ngModelChange)="friendSelection(property.User_Ref, i)"></ion-toggle>
+                    </ion-item>
+                    <ion-item-options>
+                        <button class="delete" (click)="deleteFriend(property.User_Ref,i)">Delete</button>
+                    </ion-item-options>
+                </ion-item-sliding>
+                <ion-row>
+                    <ion-col class="signup-col">
+                        <button ion-button class="submit-btn" full  (click)="sessionDuration()"  [disabled]="isFollowEnabled">Follow Me</button>
+                    </ion-col>
+                </ion-row>
+            </ion-list>
+
+            <!-- Accept the request section -->
+            <ion-list *ngSwitchCase="'accept'" inset>
+
+                <ion-list-header>Accept Friend Request</ion-list-header>
+                <ion-item-sliding *ngFor="let property of pendingFriendRequest; let i = index;" [attr.data-index]="i" [ngClass]="(acceptHideInAcceptFriendRequest[i] == true)?'hide':'show'">
+                    <ion-item>
+                        <ion-avatar item-left>
+                            <img src="{{property.From_UserProfilePic}}"/>
+                        </ion-avatar>
+                        <ion-label>
+                            <h2>{{property.From_UserName}}</h2>
+                            <p>{{property.Request_Date}}</p>
+                        </ion-label>
+                        <button ion-button outline item-end color="danger" (click)="acceptRequestToAddFriend(property.Request_Ref,property.From_UserRef,i)">Accept</button>
+                    </ion-item>
+                    <ion-item-options>
+                        <button class="delete" (click)="deleteFriendAndFollowRequest(property.Request_Ref,i,j)">Delete</button>
+                    </ion-item-options>
+                </ion-item-sliding>
+
+                <ion-list-header>Accept Follow Request</ion-list-header>
+                <ion-item-sliding *ngFor="let property of pendingFollowRequest; let j = index;" [attr.data-index]="j" [ngClass]="(acceptHideInAcceptFollowRequest[j] == true)?'hide':'show'">
+                    <ion-item>
+                        <ion-avatar item-left>
+                            <img src="{{property.From_UserProfilePic}}"/>
+                        </ion-avatar>
+                        <ion-label>
+                            <h2>{{property.From_UserName}}</h2>
+                            <p>{{property.Request_Date}}</p>
+                        </ion-label>
+                        <button ion-button outline item-end color="danger" (click)="acceptFollowRequest(property.Request_Ref,property.From_UserRef,j)">Accept</button>
+                    </ion-item>
+                    <ion-item-options>
+                        <button class="delete" (click)="deleteFriendAndFollowRequest(property.Request_Ref,i,j)">Delete</button>
+                    </ion-item-options>
+               </ion-item-sliding>
+
+               
+            </ion-list>
+        </div>
+    </div>
+
+    
+</ion-content>
+
+<ion-footer padding>
+    <ion-segment [(ngModel)]="viewMode" color="danger">
+        <ion-segment-button value="dashboard" (click) ="getDashboardData()">
+            <ion-icon name="stats"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="addfriend" (click) ="refresh()">
+            <ion-icon name="person-add"></ion-icon>
+        </ion-segment-button>
+        <ion-segment-button value="follow" (click) ="refresh()">
+            <ion-icon name="contacts"></ion-icon>
+        </ion-segment-button>
+        <button ion-button color ="danger" (click)="gotosession()">
+            <ion-icon name="browsers"></ion-icon>
+        </button>
+    </ion-segment>
+</ion-footer>

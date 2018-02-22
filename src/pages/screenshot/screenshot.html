@@ -1,0 +1,38 @@
+<!--
+  Generated template for the ScreenshotPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Social Share</ion-title>
+        <ion-buttons end>
+            <button ion-button (click)="gotohome()">
+                <ion-icon name="home"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class = "screenshot">
+    <ion-card *ngIf="imageData">
+        <img [src]="imageData"/>
+        <ion-row no-padding>
+            <ion-col text-center>
+                <button ion-button clear small color="danger" icon-start (click)="facebookShare()">
+                <i class="fa fa-facebook-square" aria-hidden="true"></i>
+                 Facebook
+                </button>
+            </ion-col>
+            <ion-col text-center>
+                <button ion-button clear small color="danger" icon-start (click)="twitterShare()">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+                 Twitter
+                </button>
+            </ion-col>
+        </ion-row>
+    </ion-card>
+</ion-content>
+
+

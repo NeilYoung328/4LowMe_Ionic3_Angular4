@@ -1,0 +1,36 @@
+<!--
+  Generated template for the SigninPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-content class="signin-content" padding>
+    <ion-row class="top-row">
+        <ion-col>
+            <img width="200px" height = "100px" src="assets/img/logo.PNG" (click) = "gotoAbout()"/>
+        </ion-col>
+    </ion-row>
+    <ion-row class="bottom-row">
+        <ion-col class="login-button">
+            <p>------ QUICK CONNECT WITH ------</p>
+            <button ion-button start block style="background-color:#3B5998" round icon-left (click) = "doFbLogin()"><ion-icon name="logo-facebook" padding-left></ion-icon>
+              Facebook Login
+            </button>
+            <button margin-top="20px" ion-button block  style="background-color:#dd4b39" icon-left round (click) = "doGoogleLogin()"><ion-icon name="logo-google"></ion-icon>
+              Google Login
+            </button>
+            <button margin-top="20px" ion-button block round style="background-color:#55ACEE" icon-left (click) = "doTwLogin()"><ion-icon name="logo-twitter"></ion-icon>
+              Twitter Login
+            </button>
+            <p margin-top="10px">------ OR USE YOUR EMAIL ------</p>
+        </ion-col>
+    </ion-row>
+    <ion-row class="button-bar">
+        <ion-col>
+            <button ion-button color="danger" outline class="bottom_btn" (click)="gotosignup()" outline>Sign Up</button>
+        </ion-col>
+        <ion-col>
+            <button ion-button color="danger" outline class="bottom_btn" (click)="gotologin()" outline>Log In</button>
+        </ion-col>
+    </ion-row>
+</ion-content>

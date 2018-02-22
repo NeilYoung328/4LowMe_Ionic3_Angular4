@@ -1,0 +1,126 @@
+// http://ionicframework.com/docs/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+.menu-logo {
+    height: 80px;
+    margin: 12px 0 0 90px;
+}
+
+.current-marker {
+	width: 50px;
+	height: 50px;
+	position: absolute;
+}
+
+.user-marker {
+	width: 40px;
+	height: 40px;
+	position: absolute;
+}
+.user-profile-img{
+	height: 40px;
+    width: 40px;
+    //margin-top: -100px;
+    border: solid 1px #FFFFFF;
+    display: inline;
+    //background-color:#fff;
+}
+
+.segment-ios .segment-button {
+    height: 3.2rem;
+    font-size: 1.3rem;
+    line-height: 3rem;
+}
+
+.segment-ios .segment-button ion-icon {
+    font-size: 2.9rem;
+    line-height: 3.3rem;
+}
+
+.button-ios {
+    height: 3.0em;
+    font-size: 1.6rem;
+}
+.button-md {
+    height: 3.0em;
+}
+
+
+.loading-md .loading-wrapper {
+    color: #ff5a41;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    background: none;
+}
+
+.loading-ios .loading-wrapper {
+    color: #ff5a41;
+    background: none;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+ion-spinner {
+    * {
+      stroke: #ff5a41;
+    }
+
+    &.spinner-bubbles circle
+    {
+      fill: #ff5a41;
+    }
+}
+
+ion-backdrop {
+    background-color: #ffffff!important;
+    opacity:0.8!important;
+}
+
+.alert-ios .alert-title {
+    color:#ff5a41;
+}
+
+.alert-md .alert-title {
+    color:#ff5a41;
+}
+
+.toast-ios .toast-wrapper {
+    //background-color:#1CA6D0;
+    background-color:#A2C922;
+}
+
+.toast-md .toast-wrapper {
+    //background-color:#1CA6D0;
+    background-color:#A2C922;
+}
+
+.card-ios {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+
+.card-md {
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 0 3px 10px rgba(0, 0, 0, 0.5);
+    border-radius: 20px;
+}
+.delete {
+    background-color:#ff5a41;
+    color:#fff;
+}
+
+

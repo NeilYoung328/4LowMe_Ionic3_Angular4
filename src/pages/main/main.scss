@@ -1,0 +1,41 @@
+page-main {
+    .signin-content{
+     // background-color: #fdf8ec;
+        background-color: rgba(245, 245, 245, 1);
+    }
+  
+        .label-logo{
+            color: white;
+            font-size: 400%;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 50px;
+        }
+  
+        .label-description{
+            color: white;
+            font-size: 130%;
+            text-align: center;
+        }
+        .login-button{
+            text-align:center;
+            p{
+              color:#666666;
+             }
+        }
+  
+        .top-row{
+            margin-top: 80px;
+            text-align:center;
+            height: 32%;
+        }
+  
+        .bottom-row{
+           height: 48%;
+  
+        }
+        .bottom_btn{
+            border-radius:20px 20px 20px 20px;
+            width:95%;
+        }
+}

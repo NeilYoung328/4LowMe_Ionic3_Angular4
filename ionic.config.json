@@ -1,0 +1,8 @@
+{
+  "name": "4LowMe",
+  "app_id": "14b7d537",
+  "type": "ionic-angular",
+  "integrations": {
+    "cordova": {}
+  }
+}

@@ -1,0 +1,61 @@
+<!--
+  Generated template for the UserPage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+    <ion-navbar no-border-bottom>
+        <ion-title>Manage Profile</ion-title>
+        <ion-buttons end>
+            <button ion-button menuToggle >
+                <ion-icon name="menu"></ion-icon>
+            </button>
+        </ion-buttons>
+    </ion-navbar>
+</ion-header>
+
+<ion-content class="profile-content" padding>
+    <ion-row class="profile-row">
+        <ion-col>
+            <ion-card>
+                <ion-card-content>
+                  <!-- Add card content here! -->
+                    <img class="profilepicture" [src] = "profilepicture" (click) ="SelectImage()"/>
+                </ion-card-content>
+            </ion-card>
+        </ion-col>
+    </ion-row>
+    <div class="profile-box" >
+        <form #registerForm="ngForm">
+            <ion-row>
+                <ion-col>
+                    <ion-list inset>
+                        <ion-item>
+                            <ion-input type="text" placeholder="FirstName" name="firstname" [(ngModel)]="user.firstName"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="text" placeholder="LastName" name="lastname" [(ngModel)]="user.lastName"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="text" placeholder="Email" name="email" [(ngModel)]="user.email"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="password" placeholder="New Password" name="password" [(ngModel)]="user.password"></ion-input>
+                        </ion-item>
+                        <ion-item>
+                            <ion-input type="number" placeholder="PhoneNumber" name="number" [(ngModel)]="user.phonenumber"></ion-input>
+                        </ion-item>
+                    </ion-list>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col class="signup-col">
+                    <button ion-button class="profile-btn" full (click) ="saveProfile()" [disabled]="!registerForm.form.valid">Save</button>
+                    <button ion-button class="profile-btn" full (click) ="logout()">Logout</button>
+                </ion-col>
+            </ion-row>
+        </form>
+    </div>
+</ion-content>
+
